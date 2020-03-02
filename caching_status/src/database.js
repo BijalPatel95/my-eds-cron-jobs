@@ -3,16 +3,15 @@ const sql = require('mssql')
 var AWS = require('aws-sdk');
 var ssm = new AWS.SSM();
 
+var dbConfig = {
+    options: {
+    enableArithAbort:false}
+};
 
 class Database {
     static async runQuery(query) {
         try {
             // const config = await dbConfig.getDBConfig();
-                var dbConfig = {
-                    options: {
-                    enableArithAbort:false}
-                };
-                
                 var params = {
                     Names: ['/${process.env.stage}/mssql/username',
                     '/${process.env.stage}/mssql/databaseName',
@@ -25,7 +24,6 @@ class Database {
                 var request = await ssm.getParameters(params).promise();
                 
                 var parameters = request.Parameters;
-                console.log('Param : ',parameters);
                 parameters.forEach(function (value) {
                     switch (value.Name) {
                         case "/${process.env.stage}/mssql/username":
