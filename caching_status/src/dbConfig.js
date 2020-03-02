@@ -43,8 +43,6 @@ exports.getDBConfig = async function() {
                     }
                 });
                 resolve(dbConfig);
-                console.log('dbConfig : ',dbConfig);
-                return dbConfig;
             }
         });
     });
