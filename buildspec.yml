@@ -25,9 +25,3 @@ phases:
       - echo build started for shell_commands on `date`
       - zip -r sshToShell.zip src sshToShell.js node_modules
       - aws lambda update-function-code --function-name $stage-cf-eds-cron-jobs-ssh-to-shell-app --zip-file "fileb://sshToShell.zip"
-
-artifacts:
-  files:
-    - app.js
-    - index.html
-    - package.json
