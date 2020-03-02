@@ -11,34 +11,33 @@ exports.getDBConfig = async function() {
     var myPromise = new Promise((resolve, reject) => {
         var params = {
             Names: [
-                '/${process.env.stage}/mssql/username',
-                '/${process.env.stage}/mssql/databaseName',
-                '/${process.env.stage}/mssql/host',
-                '/${process.env.stage}/mssql/password',
-                '/${process.env.stage}/mssql/port'
+                `/${process.env.stage}/mssql/username`,
+                `/${process.env.stage}/mssql/databaseName`,
+                `/${process.env.stage}/mssql/host`,
+                `/${process.env.stage}/mssql/password`,
+                `/${process.env.stage}/mssql/port`
             ],
             WithDecryption: true
         };
         ssm.getParameters(params, function (err, data) {
             if (err) reject(err, err.stack);
             else {
-                console.log('In else part of dbConfig');
                 var parameters = data.Parameters;
                 parameters.forEach(function (value) {
                     switch (value.Name) {
-                        case "/${process.env.stage}/mssql/username":
+                        case `/${process.env.stage}/mssql/username`:
                             dbConfig['user'] = value.Value;
                             break;
-                        case '/${process.env.stage}/mssql/databaseName':
+                        case `/${process.env.stage}/mssql/databaseName`:
                             dbConfig['database'] = value.Value;
                             break;
-                        case '/${process.env.stage}/mssql/host':
+                        case `/${process.env.stage}/mssql/host`:
                             dbConfig['server'] = value.Value;
                             break;
-                        case '/${process.env.stage}/mssql/password':
+                        case `/${process.env.stage}/mssql/password`:
                             dbConfig['password'] = value.Value;
                             break;
-                        case '/${process.env.stage}/mssql/port':
+                        case `/${process.env.stage}/mssql/port`:
                             dbConfig['port'] = Number(value.Value);
                             break;
                     }
