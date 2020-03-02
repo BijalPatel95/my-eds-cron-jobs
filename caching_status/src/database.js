@@ -5,7 +5,7 @@ var ssm = new AWS.SSM();
 
 var dbConfig = {
     options: {
-    enableArithAbort:false}
+    enableArithAbort:false},
 };
 
 class Database {
@@ -27,7 +27,7 @@ class Database {
                 parameters.forEach(function (value) {
                     switch (value.Name) {
                         case "/${process.env.stage}/mssql/username":
-                            dbConfig['user'] = value.Value;
+                            dbConfig.push['user'] = value.Value;
                             break;
                         case '/${process.env.stage}/mssql/databaseName':
                             dbConfig['database'] = value.Value;
