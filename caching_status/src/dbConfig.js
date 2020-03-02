@@ -22,6 +22,7 @@ exports.getDBConfig = async function() {
         ssm.getParameters(params, function (err, data) {
             if (err) reject(err, err.stack);
             else {
+                console.log('In else part of dbConfig');
                 var parameters = data.Parameters;
                 parameters.forEach(function (value) {
                     switch (value.Name) {
