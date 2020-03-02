@@ -1,5 +1,8 @@
 const sql = require('mssql')
-const dbConfig = require("./dbConfig")
+// const dbConfig = require("./dbConfig")
+var AWS = require('aws-sdk');
+var ssm = new AWS.SSM();
+
 
 class Database {
     static async runQuery(query) {
@@ -43,6 +46,7 @@ class Database {
                     });
 
             console.log('database : ',dbConfig);
+
             await sql.connect(dbConfig);
             console.log('connected')
             const result = await sql.query(query)
