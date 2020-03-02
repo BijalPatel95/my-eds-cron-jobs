@@ -1,0 +1,15 @@
+{
+  "name": "shell-commands",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sshToShell.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "shelljs": "^0.8.3",
+    "ssh2shell": "^1.9.3"
+  }
+}

@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - apt-get update -y
+      - apt-get install -y yarn
+  pre_build:
+    commands:
+      - cd caching_status
+      - echo Installing NPM dependencies
+      - yarn install
+      - cd shell_commands
+      - echo Installing NPM dependencies
+      - yarn install
+  build:
+    commands:
+      - cd .. && cd caching_status
+      - echo build started for caching_status on `date`
+      - zip -r cachingStatus.zip src lambda.js node_modules
+      - aws lambda update-function-code --function-name $stage-cf-eds-cron-jobs-caching-status-app --zip-file "fileb://cachingStatus.zip"
+      - cd .. && shell_commands
+      - echo build started for shell_commands on `date`
+      - zip -r sshToShell.zip src sshToShell.js node_modules
+      - aws lambda update-function-code --function-name $stage-cf-eds-cron-jobs-ssh-to-shell-app --zip-file "fileb://sshToShell.zip"
+
+artifacts:
+  files:
+    - app.js
+    - index.html
+    - package.json
