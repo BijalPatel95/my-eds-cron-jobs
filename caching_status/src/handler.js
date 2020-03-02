@@ -16,15 +16,15 @@ async function test(){
 				postBody2 = `${postBody2} \n ${row['STATUS']} : ${row['PATH']} : ${row['ERROR_MESSAGE']} \n`
 			  }
 			console.log(`${postBody} ${postBody2}`)
-			// notify.notifyProcessOnSlack(`${postBody} ${postBody2}`);
+			notify.notifyProcessOnSlack(`${postBody} ${postBody2}`);
 		}else{
 			console.log('No rows')
-			// notify.notifyProcessOnSlack(`No data found`);
+			notify.notifyProcessOnSlack(`No data found`);
 		}
 		
 	} catch(e){
 		console.log(e)
-		// notify.notifyErrorOnSlack(e);
+		notify.notifyErrorOnSlack(e);
 	}
 }
 
