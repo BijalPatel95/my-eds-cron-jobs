@@ -12,7 +12,7 @@ phases:
       - cd caching_status
       - echo Installing NPM dependencies
       - yarn install
-      - cd shell_commands
+      - cd .. && cd shell_commands
       - echo Installing NPM dependencies
       - yarn install
   build:
