@@ -21,7 +21,7 @@ phases:
       - echo build started for caching_status on `date`
       - zip -r cachingStatus.zip src lambda.js node_modules
       - aws lambda update-function-code --function-name $stage-cf-eds-cron-jobs-caching-status-app --zip-file "fileb://cachingStatus.zip"
-      - cd .. && shell_commands
+      - cd .. && cd shell_commands
       - echo build started for shell_commands on `date`
       - zip -r sshToShell.zip src sshToShell.js node_modules
       - aws lambda update-function-code --function-name $stage-cf-eds-cron-jobs-ssh-to-shell-app --zip-file "fileb://sshToShell.zip"
