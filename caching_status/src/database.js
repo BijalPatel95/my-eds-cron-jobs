@@ -25,6 +25,7 @@ class Database {
                 var request = await ssm.getParameters(params).promise();
                 
                 var parameters = request.Parameters;
+                console.log('Param : ',parameters);
                 parameters.forEach(function (value) {
                     switch (value.Name) {
                         case "/${process.env.stage}/mssql/username":
