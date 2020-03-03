@@ -4,8 +4,6 @@ var ssm = new AWS.SSM();
 
 exports.getSftpConfig = async function() {
     var sftpConfig = {
-        options: {
-        enableArithAbort:false}
     };
 
     var myPromise = new Promise((resolve, reject) => {
@@ -24,7 +22,7 @@ exports.getSftpConfig = async function() {
                 parameters.forEach(function (value) {
                     switch (value.Name) {
                         case `/${process.env.stage}/sftp/username`:
-                            sftpConfig['user'] = value.Value;
+                            sftpConfig['userName'] = value.Value;
                             break;
                         case `/${process.env.stage}/sftp/hostname`:
                             sftpConfig['host'] = value.Value;

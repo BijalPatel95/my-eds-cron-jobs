@@ -1,27 +1,44 @@
 let shell = require('shelljs');
-const sftpConfig = require("./src/sftpConfig")
+var ping = require('ping');
+// const sftpConfig = require("./src/sftpConfig")
 
-async function handler(event){
-  const server = await sftpConfig.getSftpConfig();
-  const commands = event;
-  const host = {
-  server: server,
-  commands: commands
-  };
-  const SSH2Shell = require ('ssh2shell'),
-    //Create a new instance passing in the host object
-    SSH = new SSH2Shell(host),
-    //Use a callback function to process the full session text
-    callback = function(sessionText){
-    }
+async function handler(){
+
+  var hosts = ['sftp.equitydatascience.com'];
+ 
+    hosts.forEach(function (host) {
+        ping.promise.probe(host)
+            .then(function (res) {
+                console.log(res);
+            });
+    });
 
 
-    var exec = require('child_process').exec;
-    function execute(command, callback){
-        exec(command, function(error, stdout, stderr){ callback(stdout); });
-    };
+
+  // // const server = await sftpConfig.getSftpConfig();
+  // // const commands = event;
+  // const host = {
+  // server: {
+  //   host: "sftp.equitydatascience.com",
+  //   userName: "edsadmin",
+  //   password: "OzayOrg11245",
+  // },
+  // commands: [
+  //   "msg:Connected",
+  //   "echo $(pwd)",
+  //   "ls -l"
+  //  ]
+  // };
+  // const SSH2Shell = require ('ssh2shell'),
+  //   //Create a new instance passing in the host object
+  //   SSH = new SSH2Shell(host),
+  //   //Use a callback function to process the full session text
+  //   callback = function(sessionText){
+  //     console.log(sessionText);
+  //   }
   
-  //Start the process
-  SSH.connect(callback);
+  // //Start the process
+  // SSH.connect(callback);
 }
-exports.handler = handler;
+handler();
+// exports.handler = handler;
