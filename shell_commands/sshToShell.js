@@ -1,17 +1,18 @@
 let shell = require('shelljs');
 var ping = require('ping');
+var ip = require('ip');
 // const sftpConfig = require("./src/sftpConfig")
 
 async function handler(){
-
-  var hosts = ['sftp.equitydatascience.com'];
+  console.log(ip.address());
+  // var hosts = ['sftp.equitydatascience.com'];
  
-    hosts.forEach(function (host) {
-        ping.promise.probe(host)
-            .then(function (res) {
-                console.log(res);
-            });
-    });
+  //   hosts.forEach(function (host) {
+  //       ping.promise.probe(host)
+  //           .then(function (res) {
+  //               console.log(res);
+  //           });
+  //   });
 
 
 
