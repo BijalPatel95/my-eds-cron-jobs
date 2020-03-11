@@ -1,20 +1,20 @@
 let shell = require('shelljs');
 var ping = require('ping');
-var ip = require('ip');
+// var dns = require('dns');
 // const sftpConfig = require("./src/sftpConfig")
 
 async function handler(){
-  console.log(ip.address());
-  // var hosts = ['sftp.equitydatascience.com'];
- 
-  //   hosts.forEach(function (host) {
-  //       ping.promise.probe(host)
-  //           .then(function (res) {
-  //               console.log(res);
-  //           });
-  //   });
+  var hosts = ['sftp.equitydatascience.com','157.56.13.143'];
+  hosts.forEach(function(host){
+    ping.sys.probe(host, function(isAlive){
+              var msg = isAlive ? 'host ' + host + ' is alive' : 'host ' + host + ' is dead';
+              console.log(msg);
+          });
+        });
 
-
+  // var ip = dns.lookup('sftp.equitydatascience.com', function (err, addresses, family) {
+  //   console.log(addresses);
+  // });
 
   // // const server = await sftpConfig.getSftpConfig();
   // // const commands = event;
